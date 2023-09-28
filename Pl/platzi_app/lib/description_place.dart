@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
+// ignore: must_be_immutable, camel_case_types
 class Description_place extends StatelessWidget {
 // Variables
   String namePlace;
@@ -8,7 +10,8 @@ class Description_place extends StatelessWidget {
 
   // Constructor
 
-  Description_place(this.namePlace, this.stars, this.textDescription);
+  Description_place(this.namePlace, this.stars, this.textDescription,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,8 @@ class Description_place extends StatelessWidget {
           ),
           child: Text(
             namePlace,
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                fontSize: 30, fontWeight: FontWeight.bold, fontFamily: "Lato"),
             textAlign: TextAlign.left,
           ),
         ),
@@ -75,7 +79,8 @@ class Description_place extends StatelessWidget {
         child: Text(
           textDescription,
           textAlign: TextAlign.left,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+          style: const TextStyle(
+              fontSize: 20, fontWeight: FontWeight.w400, fontFamily: "Lato"),
         ));
 
     final descriptionPeople = Column(
