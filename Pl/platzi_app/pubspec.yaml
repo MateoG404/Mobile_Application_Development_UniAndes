@@ -20,6 +20,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/images.jpeg
+    - assets/images/choconta.jpeg
     - assets/images/viajero.png
 
   uses-material-design: true
