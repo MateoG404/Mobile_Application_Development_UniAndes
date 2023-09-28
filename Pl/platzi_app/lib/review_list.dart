@@ -12,7 +12,9 @@ class ReviewList extends StatelessWidget {
         Review("assets/images/viajero.png", "Mateo Camelo", "1 Review 5 Photos",
             "Muy buen lugar"),
         Review("assets/images/viajero.png", "Mateo Camelo", "1 Review 5 Photos",
-            "Muy buen lugar")
+            "Muy buen lugar"),
+        Review("assets/images/viajero.png", "Mateo Camelo", "1 Review 5 Photos",
+            "Muy buen lugar"),
       ],
     );
   }

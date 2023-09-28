@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:platzi_app/description_place.dart';
 import 'package:platzi_app/review.dart';
 import 'package:platzi_app/review_list.dart';
+import 'package:platzi_app/gradient_back.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,11 +30,23 @@ class MyApp extends StatelessWidget {
               ),
               backgroundColor: Colors.black,
             ),
-            body: ReviewList())
+            //body: ReviewList())
+            body: Stack(
+              children: [
+                ListView(
+                  children: [
+                    Description_place('Choconta', 4,
+                        'Pueblo ubicado en Cundinamarca Colombia, cercano a Bogota a 2 horas'),
+                    ReviewList()
+                  ],
+                ),
+                GradientBack()
+              ],
+            )
 
-        //Description_place("Mateo Gutierrez", 4,
-        //    "Prueba de texto de descripción Prueba de texto de descripción Prueba de texto de descripciónPrueba de texto de descripción "),
-        //)
-        );
+            //Description_place("Mateo Gutierrez", 4,
+            //    "Prueba de texto de descripción Prueba de texto de descripción Prueba de texto de descripciónPrueba de texto de descripción "),
+            //)
+            ));
   }
 }
