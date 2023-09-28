@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:platzi_app/second_task.dart';
 import 'package:platzi_app/description_place.dart';
+import 'package:platzi_app/review.dart';
+import 'package:platzi_app/review_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,16 +21,19 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              "Hola ",
-              style: TextStyle(color: Colors.white),
-              textAlign: TextAlign.center,
+            appBar: AppBar(
+              title: const Text(
+                "Hola ",
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              backgroundColor: Colors.black,
             ),
-            backgroundColor: Colors.black,
-          ),
-          body: Description_place("Mateo Gutierrez", 4,
-              "Prueba de texto de descripción Prueba de texto de descripción Prueba de texto de descripciónPrueba de texto de descripción "),
-        ));
+            body: ReviewList())
+
+        //Description_place("Mateo Gutierrez", 4,
+        //    "Prueba de texto de descripción Prueba de texto de descripción Prueba de texto de descripciónPrueba de texto de descripción "),
+        //)
+        );
   }
 }
