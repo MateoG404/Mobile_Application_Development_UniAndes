@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tercer_reto/pages/contacto.dart';
 import 'package:tercer_reto/pages/header.dart';
 
 void main() {
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: Header(),
+        body: ListView(
+          children: [Header(), Contacto()],
+        ),
       ),
     );
   }

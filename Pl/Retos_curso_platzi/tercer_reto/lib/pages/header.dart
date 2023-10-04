@@ -17,7 +17,7 @@ class Header extends StatelessWidget {
                 end: FractionalOffset(0.15, 0.18),
                 tileMode: TileMode.mirror)),
         child: Container(
-            margin: EdgeInsets.only(top: 40),
+            margin: EdgeInsets.only(top: 30),
             child: const Text(
               'Tus Contactos',
               textAlign: TextAlign.center,
