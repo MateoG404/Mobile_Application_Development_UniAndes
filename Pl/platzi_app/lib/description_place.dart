@@ -84,6 +84,7 @@ class Description_place extends StatelessWidget {
         ));
 
     final descriptionPeople = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [titleStars, descriptionUser],
     );
     return descriptionPeople;
