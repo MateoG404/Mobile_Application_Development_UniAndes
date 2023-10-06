@@ -52,22 +52,32 @@ class Contacto extends StatelessWidget {
       ),
     );
 
-    final contactar = InkWell(
+    final contactar = Container(
+      margin: const EdgeInsets.only(left: 130, right: 20),
+      height: 35,
+      width: 35,
+      child: InkWell(
+        borderRadius: const BorderRadius.horizontal(
+            left: Radius.circular(10),
+            right: Radius.circular(
+                10)), // Asegura que el InkWell tenga las mismas esquinas redondeadas que el Container
         onTap: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-            "Contacto $nombre_persona",
+            "Llamando a $nombre_persona",
           )));
         },
         child: Container(
-          margin: const EdgeInsets.only(left: 130, right: 20),
-          height: 35,
-          width: 35,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.horizontal(
+              borderRadius: const BorderRadius.horizontal(
                   left: Radius.circular(10), right: Radius.circular(10)),
               color: Colors.indigo[900]),
-        ));
+          child: const Center(
+            child: Icon(Icons.call, color: Colors.white), // Icono agregado aquí
+          ),
+        ),
+      ),
+    );
 
     return Container(
       width: double.infinity,
