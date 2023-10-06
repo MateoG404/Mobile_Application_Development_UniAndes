@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tercer_reto/pages/contacto.dart';
+import 'package:tercer_reto/pages/contacto_list.dart';
 import 'package:tercer_reto/pages/header.dart';
 
 void main() {
@@ -7,9 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,8 +19,27 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: ListView(
-          children: [Header(), Contacto()],
+        body: Column(
+          children: [
+            Header(), // Tu widget Header personalizado
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return Contacto(
+                            nombre_persona:
+                                'Persona $index'); // Asegúrate de que esta clase esté importada correctamente
+                      },
+                      childCount:
+                          1000, // Ajusta este número según tus necesidades
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
