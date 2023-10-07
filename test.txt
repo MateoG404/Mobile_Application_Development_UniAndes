@@ -1,0 +1,10 @@
+1. Grabadora de voz
+	lista de audios (sort)
+	Eliminar y reproducir listview
+	temporizador
+	pausar audio
+
+
+	correo : z
+
+	
