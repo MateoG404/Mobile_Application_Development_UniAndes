@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grabadora_app/menu_principal.dart';
+import 'package:grabadora_app/pages/menu_principal.dart';
 
 void main() {
   runApp(const MyApp());
