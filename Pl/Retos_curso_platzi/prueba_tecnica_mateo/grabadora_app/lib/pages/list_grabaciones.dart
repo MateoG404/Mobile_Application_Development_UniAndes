@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grabadora_app/pages/grabacion.dart';
 
-class ListGrabaciones extends StatelessWidget {
-  const ListGrabaciones({super.key});
+class ListaGrabaciones extends StatelessWidget {
+  const ListaGrabaciones({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +14,26 @@ class ListGrabaciones extends StatelessWidget {
             child: const Text(
               'Mis grabaciones',
               textAlign: TextAlign.left,
-              style: TextStyle(color: Colors.black, fontSize: 30),
+              style: TextStyle(color: Colors.white, fontSize: 30),
             )));
 
     return Container(
-      color: Colors.white, // Add this line for white background
-      child: Column(children: [texto]),
+      color: Colors.black, // Add this line for white background
+      child: Column(children: [
+        texto,
+        Grabacion(
+          titulo_grabacion: "titulddo",
+          descripcion_grabacion: "Duracion 80 min",
+        ),
+        Grabacion(
+          titulo_grabacion: "titulddo",
+          descripcion_grabacion: "Duracion 80 min",
+        ),
+        Grabacion(
+          titulo_grabacion: "titulddo",
+          descripcion_grabacion: "Duracion 80 min",
+        )
+      ]),
     );
   }
 }

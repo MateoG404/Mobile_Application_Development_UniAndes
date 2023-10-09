@@ -14,12 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-          useMaterial3: true,
+          scaffoldBackgroundColor: Colors.black, // Fondo blanco
         ),
-        home: Grabacion(
-          titulo_grabacion: "titulo",
-          descripcion_grabacion: "Duracion 80 min",
-        ));
+        home: ListaGrabaciones());
   }
 }
