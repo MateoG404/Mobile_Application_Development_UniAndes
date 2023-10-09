@@ -13,27 +13,32 @@ class ListaGrabaciones extends StatelessWidget {
             margin: const EdgeInsets.only(top: 40, left: 20),
             child: const Text(
               'Mis grabaciones',
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 30),
             )));
 
     return Container(
-      color: Colors.black, // Add this line for white background
-      child: Column(children: [
-        texto,
-        Grabacion(
-          titulo_grabacion: "titulddo",
-          descripcion_grabacion: "Duracion 80 min",
+      color: Colors.black,
+      child: SingleChildScrollView(
+        // Wrap with SingleChildScrollView
+        child: Column(
+          children: [
+            texto,
+            Grabacion(
+              titulo_grabacion: "ddd",
+              descripcion_grabacion: "Duracion 80 min",
+            ),
+            Grabacion(
+              titulo_grabacion: "titulddo",
+              descripcion_grabacion: "Duracion 80 min",
+            ),
+            Grabacion(
+              titulo_grabacion: "titulddo",
+              descripcion_grabacion: "Duracion 80 min",
+            ),
+          ],
         ),
-        Grabacion(
-          titulo_grabacion: "titulddo",
-          descripcion_grabacion: "Duracion 80 min",
-        ),
-        Grabacion(
-          titulo_grabacion: "titulddo",
-          descripcion_grabacion: "Duracion 80 min",
-        )
-      ]),
+      ),
     );
   }
 }

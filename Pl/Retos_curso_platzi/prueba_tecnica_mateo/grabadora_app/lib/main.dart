@@ -12,10 +12,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Prueba tecnica Mateo',
         theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+
           scaffoldBackgroundColor: Colors.black, // Fondo blanco
+          useMaterial3: true,
         ),
-        home: ListaGrabaciones());
+        home: Scaffold(
+          body: ListaGrabaciones(),
+        ));
   }
 }
