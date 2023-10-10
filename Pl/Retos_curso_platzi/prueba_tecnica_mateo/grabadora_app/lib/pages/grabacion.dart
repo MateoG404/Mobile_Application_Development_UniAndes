@@ -18,7 +18,7 @@ class Grabacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nombreGrabacion = Container(
-      margin: const EdgeInsets.only(left: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20),
       child: Text(
         titulo_grabacion,
         style: const TextStyle(
@@ -28,7 +28,7 @@ class Grabacion extends StatelessWidget {
     );
 
     final descripcion = Container(
-      margin: const EdgeInsets.only(left: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20),
       child: Text(
         descripcion_grabacion,
         style: const TextStyle(
@@ -46,22 +46,28 @@ class Grabacion extends StatelessWidget {
     );
     final divider = Divider(
       color: Colors.white30,
+      height: 8,
     );
     return Container(
-        margin: EdgeInsets.only(top: 10, left: 20),
         color: Colors.black,
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                BotonReproduccion(),
-                Expanded(
-                    child: nombreDescirpionGrabacion), // Wrapped with Expanded
-              ],
-            ),
-            Container(margin: EdgeInsets.only(top: 10), child: divider)
+            Container(
+                margin: EdgeInsets.only(top: 10, left: 15, right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BotonReproduccion(),
+                    Expanded(
+                        child:
+                            nombreDescirpionGrabacion), // Wrapped with Expanded
+                  ],
+                )),
+            Container(
+              child: divider,
+              margin: EdgeInsets.only(top: 10, left: 4, right: 4),
+            )
           ],
         ));
   }

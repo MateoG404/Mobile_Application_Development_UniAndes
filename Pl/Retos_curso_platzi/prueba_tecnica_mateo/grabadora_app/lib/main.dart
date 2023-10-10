@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grabadora_app/pages/body.dart';
 import 'package:grabadora_app/pages/grabacion.dart';
 import 'package:grabadora_app/pages/list_grabaciones.dart';
 
@@ -19,8 +20,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.black, // Fondo blanco
           useMaterial3: true,
         ),
-        home: Scaffold(
-          body: ListaGrabaciones(),
-        ));
+        home: Scaffold(body: BodyClass() // b ListaGrabaciones(),
+            ));
   }
 }

@@ -6,24 +6,12 @@ class ListaGrabaciones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final texto = Container(
-        height: 100,
-        width: MediaQuery.of(context).size.width,
-        child: Container(
-            margin: const EdgeInsets.only(top: 40, left: 20),
-            child: const Text(
-              'Mis grabaciones',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            )));
-
     return Container(
       color: Colors.black,
       child: SingleChildScrollView(
         // Wrap with SingleChildScrollView
         child: Column(
           children: [
-            texto,
             Grabacion(
               titulo_grabacion: "ddd",
               descripcion_grabacion: "Duracion 80 min",
