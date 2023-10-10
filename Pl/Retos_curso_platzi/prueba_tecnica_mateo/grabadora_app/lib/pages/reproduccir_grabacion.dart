@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:grabadora_app/pages/boton_reproduccion.dart';
 
-class Grabacion extends StatelessWidget {
+class ReproduccirGrabacion extends StatelessWidget {
   // ignore: non_constant_identifier_names
   final String titulo_grabacion;
   // ignore: non_constant_identifier_names
   final String descripcion_grabacion;
 
-  const Grabacion(
+  const ReproduccirGrabacion(
       {Key? key,
       // ignore: non_constant_identifier_names
       required this.titulo_grabacion,

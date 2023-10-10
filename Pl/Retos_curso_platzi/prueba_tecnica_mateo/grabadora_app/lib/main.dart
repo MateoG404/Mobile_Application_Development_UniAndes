@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grabadora_app/pages/body.dart';
-import 'package:grabadora_app/pages/grabacion.dart';
+import 'package:grabadora_app/pages/reproduccir_grabacion.dart';
 import 'package:grabadora_app/pages/list_grabaciones.dart';
 
 void main() {

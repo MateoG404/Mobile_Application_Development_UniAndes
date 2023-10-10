@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grabadora_app/pages/grabacion.dart';
+import 'package:grabadora_app/pages/reproduccir_grabacion.dart';
 
 class ListaGrabaciones extends StatelessWidget {
   const ListaGrabaciones({super.key});
@@ -12,15 +12,15 @@ class ListaGrabaciones extends StatelessWidget {
         // Wrap with SingleChildScrollView
         child: Column(
           children: [
-            Grabacion(
+            ReproduccirGrabacion(
               titulo_grabacion: "ddd",
               descripcion_grabacion: "Duracion 80 min",
             ),
-            Grabacion(
+            ReproduccirGrabacion(
               titulo_grabacion: "titulddo",
               descripcion_grabacion: "Duracion 80 min",
             ),
-            Grabacion(
+            ReproduccirGrabacion(
               titulo_grabacion: "titulddo",
               descripcion_grabacion: "Duracion 80 min",
             ),

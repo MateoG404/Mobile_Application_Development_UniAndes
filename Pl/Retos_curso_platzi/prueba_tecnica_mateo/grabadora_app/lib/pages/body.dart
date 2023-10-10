@@ -1,31 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grabadora_app/pages/list_grabaciones.dart';
-
-class Gratitude extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Icon(
-        Icons.sentiment_satisfied,
-        size: 120.0,
-        color: Colors.lightGreen,
-      ),
-    );
-  }
-}
-
-class Record extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Icon(
-        Icons.fiber_manual_record_rounded,
-        size: 120.0,
-        color: Colors.blue,
-      ),
-    );
-  }
-}
+import 'package:grabadora_app/pages/record.dart';
 
 class BodyClass extends StatefulWidget {
   @override
@@ -69,7 +44,9 @@ class _BodyClassState extends State<BodyClass>
               style: TextStyle(color: Colors.black, fontSize: 30),
             ),
           ),
-          Expanded(
+          Container(
+            width: 100,
+            height: 100,
             child: TabBarView(
               controller: _tabController,
               children: [
@@ -85,7 +62,9 @@ class _BodyClassState extends State<BodyClass>
         child: TabBar(
           controller: _tabController,
           tabs: [
-            Tab(icon: Icon(Icons.fiber_manual_record), text: 'Grabar'),
+            Tab(
+                icon: Icon(Icons.fiber_manual_record, color: Colors.blue),
+                text: 'Grabar'),
             Tab(icon: Icon(Icons.list_sharp), text: 'Ver Audios'),
           ],
         ),
