@@ -1,6 +1,6 @@
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
-import 'package:record/src/record.dart';
+
 import 'dart:ui' as ui show Gradient;
 
 class AudioVisualOndas extends StatefulWidget {

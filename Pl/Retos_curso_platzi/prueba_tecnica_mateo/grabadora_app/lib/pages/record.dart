@@ -66,18 +66,25 @@ class _RecordClass extends State<RecordClass> {
     }
   }
 
+  Future<void> guardarAudio() async {
+    final path = await recorderController.stop();
+// Reiniciar la duración a cero
+    _duracion = Duration.zero;
+
+    setState(() {
+      isRecording = false;
+      audioPath = path!;
+    });
+    _timer.cancel();
+  }
+
   Future<void> stop() async {
     try {
-      //String? path = await audioRecord.stop();
-      // Reiniciar la duración a cero
-      _duracion = Duration.zero;
-      final path = await recorderController.stop();
-
+      await recorderController.pause();
+      _timer.cancel();
       setState(() {
         isRecording = false;
-        audioPath = path!;
       });
-      _timer.cancel();
     } catch (e) {
       print("NO se pudo parar la grabacion");
     }
@@ -97,6 +104,8 @@ class _RecordClass extends State<RecordClass> {
     return Stack(
       alignment: Alignment.center,
       children: [
+        // Boton para grabar o pausar grabacion
+
         Positioned(
           top: 150,
           child: SizedBox(
@@ -115,6 +124,9 @@ class _RecordClass extends State<RecordClass> {
             ),
           ),
         ),
+
+        // Boton de guardar
+
         Positioned(
             top: 250,
             right: 100,
@@ -122,20 +134,25 @@ class _RecordClass extends State<RecordClass> {
               width: 40,
               height: 40,
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: guardarAudio,
                 shape: const CircleBorder(),
                 child: const Icon(Icons.save),
               ),
             )),
         //ElevatedButton(onPressed: playRecording, child: const Text("Poner")),
+
+        // Duracion de grabacion
+
         Positioned(
             top: 300,
             child: Container(
               child: Text(
                 '${(_duracion.inMinutes % 60).toString().padLeft(2, '0')}:${(_duracion.inSeconds % 60).toString().padLeft(2, '0')}',
-                style: TextStyle(color: Colors.white60, fontSize: 30),
+                style: const TextStyle(color: Colors.white60, fontSize: 30),
               ),
             )),
+
+        // Visualizador de audio
         Positioned(
             top: 380,
             child: Container(

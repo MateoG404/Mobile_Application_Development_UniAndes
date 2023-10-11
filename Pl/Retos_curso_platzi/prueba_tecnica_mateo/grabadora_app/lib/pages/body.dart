@@ -55,7 +55,7 @@ class _BodyClassState extends State<BodyClass>
           controller: _tabController,
           tabs: [
             Tab(
-                icon: Icon(Icons.fiber_manual_record, color: Colors.blue),
+                icon: Icon(Icons.fiber_manual_record, color: Colors.purple),
                 text: 'Grabar'),
             Tab(icon: Icon(Icons.list_sharp), text: 'Ver Audios'),
           ],
