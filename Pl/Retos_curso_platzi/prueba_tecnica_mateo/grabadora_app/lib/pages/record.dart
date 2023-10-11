@@ -115,6 +115,18 @@ class _RecordClass extends State<RecordClass> {
             ),
           ),
         ),
+        Positioned(
+            top: 250,
+            right: 100,
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: FloatingActionButton(
+                onPressed: () {},
+                shape: const CircleBorder(),
+                child: const Icon(Icons.save),
+              ),
+            )),
         //ElevatedButton(onPressed: playRecording, child: const Text("Poner")),
         Positioned(
             top: 300,
