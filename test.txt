@@ -1,8 +1,13 @@
-1. Grabadora de voz
-	lista de audios (sort)
-	Eliminar y reproducir listview
-	temporizador
-	pausar audio
+        1. Grabadora de voz (<>)
+       
+	2. lista de audios (sort)
+	
+	3. Eliminar y reproducir listview
+
+	4. Temporizador
+
+	5. Pausar audio
+	
 
 
 	correo : z
