@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sound_web/flutter_sound_recorder_web.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 
 class Record extends StatefulWidget {
   @override
@@ -9,13 +9,42 @@ class Record extends StatefulWidget {
 }
 
 class _Record extends State<Record> {
-  var isRecording = true;
+  var isRecording = false; // Variable to know if we are recording
   final recorder = FlutterSoundRecorder();
 
-  void onPressedRecord() async {
+  @override
+  void initState() {
+    super.initState();
+    initRecorder();
+  }
+
+  Future<void> initRecorder() async {
+    await recorder.openRecorder();
+  }
+
+  Future<void> record() async {
+    await recorder.startRecorder(toFile: 'path/to/your/file');
+  }
+
+  Future<void> stop() async {
+    await recorder.stopRecorder();
+  }
+
+  void onPressedRecord() {
+    if (isRecording) {
+      stop();
+    } else {
+      record();
+    }
     setState(() {
       isRecording = !isRecording;
     });
+  }
+
+  @override
+  void dispose() {
+    recorder.closeRecorder();
+    super.dispose();
   }
 
   @override
@@ -24,17 +53,17 @@ class _Record extends State<Record> {
       alignment: Alignment.center,
       children: [
         Positioned(
-          top: 150, // Ajusta este valor para mover el círculo hacia arriba
+          top: 150, // Adjust this value to move the circle upwards
           child: SizedBox(
-            width: 120, // Ajusta el ancho del contenedor
-            height: 120, // Ajusta la altura del contenedor
+            width: 120, // Adjust the width of the container
+            height: 120, // Adjust the height of the container
             child: FloatingActionButton(
               onPressed: onPressedRecord,
               shape: const CircleBorder(),
               elevation: 10,
               child: Icon(
                 isRecording == false ? Icons.mic : Icons.stop,
-                size: 40, // Ajusta el tamaño del ícono
+                size: 40, // Adjust the size of the icon
               ),
             ),
           ),
