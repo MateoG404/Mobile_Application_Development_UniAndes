@@ -17,6 +17,7 @@ class _RecordClass extends State<RecordClass> {
   late final RecorderController recorderController;
   bool isRecording = false;
   late Record audioRecord;
+  late PlayerController playerController;
   late AudioPlayer audioPlayer;
   String audioPath = '';
   late Timer _timer;
@@ -32,6 +33,7 @@ class _RecordClass extends State<RecordClass> {
 
     // Iniciar recorder
 
+    playerController = PlayerController();
     recorderController = RecorderController();
 
     super.initState();
@@ -66,10 +68,33 @@ class _RecordClass extends State<RecordClass> {
     }
   }
 
+  Future<void> cancelarAudio() async {
+    _duracion = Duration.zero;
+    await recorderController.stop();
+    setState(() {
+      isRecording = false;
+    });
+    _timer.cancel();
+
+    // Mostrar un Snackbar para notificar al usuario
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('El audio fue eliminado. Puede grabar de nuevo.'),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+
   Future<void> guardarAudio() async {
     final path = await recorderController.stop();
-// Reiniciar la duración a cero
+
+    // Reiniciar la duración a cero
     _duracion = Duration.zero;
+    print("-->>");
+    print("-->>");
+    print(path);
+    print("-->>");
+    print("-->>");
 
     setState(() {
       isRecording = false;
@@ -92,8 +117,17 @@ class _RecordClass extends State<RecordClass> {
 
   Future<void> playRecording() async {
     try {
-      Source urlSource = UrlSource(audioPath);
-      await audioPlayer.play(urlSource);
+      // Detener y guardar la grabación actual, si es necesario
+      final path = await recorderController.stop();
+      setState(() {
+        audioPath = path!;
+      });
+
+      // Preparar el reproductor con el path del archivo de audio
+      await playerController.preparePlayer(path: audioPath);
+
+      // Iniciar la reproducción
+      await playerController.startPlayer();
     } catch (e) {
       print("error para reproducir");
     }
@@ -139,7 +173,26 @@ class _RecordClass extends State<RecordClass> {
                 child: const Icon(Icons.save),
               ),
             )),
-        //ElevatedButton(onPressed: playRecording, child: const Text("Poner")),
+
+// Boton eliminar
+
+        Positioned(
+            top: 250,
+            left: 100,
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: FloatingActionButton(
+                onPressed: cancelarAudio,
+                shape: const CircleBorder(),
+                child: const Icon(Icons.delete),
+              ),
+            )),
+
+        Positioned(
+            top: 450,
+            child: ElevatedButton(
+                onPressed: playRecording, child: const Text("Poner"))),
 
         // Duracion de grabacion
 
