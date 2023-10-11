@@ -29,25 +29,27 @@ class _Record extends State<Record> {
       throw 'Microfono permiso fallido';
     }
     await recorder.openRecorder();
+    print("FlutterSoundRecorder abierto: ${recorder.isRecording}");
   }
 
   Future<void> record() async {
     final directory = await getApplicationDocumentsDirectory();
-    final path = Directory(
-        '${directory.path}/audio_files'); // Create a subfolder named 'audio_files'
-
+    final path = Directory('${directory.path}/audio_files');
     if (!await path.exists()) {
-      await path.create(
-          recursive: true); // Create the folder if it doesn't exist
+      await path.create(recursive: true);
     }
-
-    final filePath =
-        '${path.path}/audio_file.aac'; // File will be saved in the 'audio_files' folder
-    await recorder.startRecorder(toFile: filePath);
+    final filePath = '${path.path}/audio_file.aac';
+    await recorder.startRecorder(toFile: filePath, codec: Codec.aacADTS);
+    setState(() {
+      isRecording = true;
+    });
   }
 
   Future<void> stop() async {
     await recorder.stopRecorder();
+    setState(() {
+      isRecording = false;
+    });
   }
 
   void onPressedRecord() {
@@ -56,9 +58,6 @@ class _Record extends State<Record> {
     } else {
       record();
     }
-    setState(() {
-      isRecording = !isRecording;
-    });
   }
 
   @override
@@ -88,6 +87,28 @@ class _Record extends State<Record> {
             ),
           ),
         ),
+        Positioned(
+            top: 300,
+            child: Container(
+              child: StreamBuilder<RecordingDisposition>(
+                stream: recorder.onProgress,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    print(
+                        "StreamBuilder tiene datos: ${snapshot.data!.duration}");
+                  } else {
+                    print("StreamBuilder no tiene datos");
+                  }
+                  final duracion = snapshot.hasData
+                      ? snapshot.data!.duration
+                      : Duration.zero;
+                  return Text(
+                    '${(duracion.inMinutes % 60).toString().padLeft(2, '0')}:${(duracion.inSeconds % 60).toString().padLeft(2, '0')}',
+                    style: TextStyle(color: Colors.white60, fontSize: 30),
+                  );
+                },
+              ),
+            ))
       ],
     );
   }
