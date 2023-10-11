@@ -1,31 +1,75 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:grabadora_app/pages/reproduccir_grabacion.dart';
 
-class ListaGrabaciones extends StatelessWidget {
-  const ListaGrabaciones({super.key});
+// Definición de la clase ListaGrabaciones como un StatefulWidget
+class ListaGrabaciones extends StatefulWidget {
+  @override
+  _ListaGrabacionesState createState() => _ListaGrabacionesState();
+}
+
+// Definición del estado de ListaGrabaciones
+class _ListaGrabacionesState extends State<ListaGrabaciones> {
+  // Declaración de una variable para almacenar los archivos de audio futuros
+  late Future<List<FileSystemEntity>> futureFiles;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializar futureFiles con la función _getAudioFiles
+    futureFiles = _getAudioFiles();
+  }
+
+  // Función para obtener la lista de archivos de audio
+  Future<List<FileSystemEntity>> _getAudioFiles() async {
+    // Obtener el directorio de documentos de la aplicación
+    final directory = await getApplicationDocumentsDirectory();
+    // Definir la ruta de la carpeta "grabaciones"
+    final folderPath = '${directory.path}/grabaciones';
+    final folder = Directory(folderPath);
+    // Comprobar si la carpeta "grabaciones" existe
+    if (await folder.exists()) {
+      // Devolver la lista de archivos en la carpeta
+      return folder.listSync();
+    } else {
+      // Devolver una lista vacía si la carpeta no existe
+      return [];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      child: SingleChildScrollView(
-        // Wrap with SingleChildScrollView
-        child: Column(
-          children: [
-            ReproduccirGrabacion(
-              titulo_grabacion: "ddd",
-              descripcion_grabacion: "Duracion 80 min",
-            ),
-            ReproduccirGrabacion(
-              titulo_grabacion: "titulddo",
-              descripcion_grabacion: "Duracion 80 min",
-            ),
-            ReproduccirGrabacion(
-              titulo_grabacion: "titulddo",
-              descripcion_grabacion: "Duracion 80 min",
-            ),
-          ],
-        ),
+      child: FutureBuilder<List<FileSystemEntity>>(
+        // Usar futureFiles como el Future para FutureBuilder
+        future: futureFiles,
+        builder: (context, snapshot) {
+          // Mostrar un indicador de carga si los datos aún no están disponibles
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          // Mostrar un mensaje de error si algo sale mal
+          else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+          // Construir la lista de widgets ReproducirGrabacion si los datos están disponibles
+          else {
+            return SingleChildScrollView(
+              child: Column(
+                children: snapshot.data!
+                    .map((file) => ReproduccirGrabacion(
+                          // Usar el último segmento de la ruta del archivo como el título
+                          titulo_grabacion: file.uri.pathSegments.last,
+                          // Usar un marcador de posición para la duración
+                          descripcion_grabacion: "Duración a determinar",
+                        ))
+                    .toList(),
+              ),
+            );
+          }
+        },
       ),
     );
   }

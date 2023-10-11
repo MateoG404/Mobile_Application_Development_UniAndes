@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -93,6 +92,31 @@ class _RecordClass extends State<RecordClass> {
   Future<void> guardarAudio() async {
     final path = await recorderController.stop();
 
+    // Mostrar un cuadro de diálogo para capturar el nombre del archivo
+    String? fileName;
+    // ignore: use_build_context_synchronously
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Ingrese el nombre del archivo'),
+          content: TextField(
+            onChanged: (value) {
+              fileName = value;
+            },
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Guardar'),
+            ),
+          ],
+        );
+      },
+    );
+
     // Obtener el directorio de documentos
     final directory = await getApplicationDocumentsDirectory();
 
@@ -104,9 +128,8 @@ class _RecordClass extends State<RecordClass> {
     }
 
     // Mover el archivo de audio a la carpeta "grabaciones"
-    final fileName = path!.split('/').last;
-    final newPath = '$folderPath/$fileName';
-    await File(path).rename(newPath);
+    final newPath = '$folderPath/$fileName.aac';
+    await File(path!).rename(newPath);
 
     // Reiniciar la duración a cero
     _duracion = Duration.zero;
@@ -118,12 +141,7 @@ class _RecordClass extends State<RecordClass> {
     _timer.cancel();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Center(
-          child: Text(
-            'El audio fue guardado correctamente',
-            style: TextStyle(fontStyle: FontStyle.normal),
-          ),
-        ),
+        content: Center(child: Text('El audio fue guardado con exito')),
         duration: Duration(seconds: 3),
       ),
     );
