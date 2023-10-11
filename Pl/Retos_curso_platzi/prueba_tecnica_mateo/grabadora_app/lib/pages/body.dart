@@ -9,6 +9,7 @@ class BodyClass extends StatefulWidget {
 
 class _BodyClassState extends State<BodyClass>
     with SingleTickerProviderStateMixin {
+  late String titulo = "Grabar";
   late TabController _tabController;
 
   @override
@@ -29,8 +30,8 @@ class _BodyClassState extends State<BodyClass>
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
-        title: const Text(
-          'Mis grabaciones',
+        title: Text(
+          titulo,
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.white, fontSize: 30),
         ),
