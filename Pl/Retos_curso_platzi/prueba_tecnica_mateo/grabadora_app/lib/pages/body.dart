@@ -41,7 +41,7 @@ class _BodyClassState extends State<BodyClass>
             child: TabBarView(
               controller: _tabController,
               children: [
-                Record(),
+                RecordClass(),
                 ListaGrabaciones(),
               ],
             ),
