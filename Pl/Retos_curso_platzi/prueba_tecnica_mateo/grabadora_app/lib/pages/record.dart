@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:grabadora_app/pages/audio_visual_ondas.dart';
 import 'package:record/record.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -77,9 +80,11 @@ class _RecordClass extends State<RecordClass> {
     _timer.cancel();
 
     // Mostrar un Snackbar para notificar al usuario
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('El audio fue eliminado. Puede grabar de nuevo.'),
+        content: Center(
+            child: Text('El audio fue eliminado. Puede grabar de nuevo.')),
         duration: Duration(seconds: 3),
       ),
     );
@@ -88,19 +93,40 @@ class _RecordClass extends State<RecordClass> {
   Future<void> guardarAudio() async {
     final path = await recorderController.stop();
 
+    // Obtener el directorio de documentos
+    final directory = await getApplicationDocumentsDirectory();
+
+    // Crear una carpeta llamada "grabaciones" si no existe
+    final folderPath = '${directory.path}/grabaciones';
+    final folder = Directory(folderPath);
+    if (!await folder.exists()) {
+      await folder.create();
+    }
+
+    // Mover el archivo de audio a la carpeta "grabaciones"
+    final fileName = path!.split('/').last;
+    final newPath = '$folderPath/$fileName';
+    await File(path).rename(newPath);
+
     // Reiniciar la duración a cero
     _duracion = Duration.zero;
-    print("-->>");
-    print("-->>");
-    print(path);
-    print("-->>");
-    print("-->>");
 
     setState(() {
       isRecording = false;
-      audioPath = path!;
+      audioPath = newPath;
     });
     _timer.cancel();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(
+          child: Text(
+            'El audio fue guardado correctamente',
+            style: TextStyle(fontStyle: FontStyle.normal),
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
   }
 
   Future<void> stop() async {
@@ -188,16 +214,16 @@ class _RecordClass extends State<RecordClass> {
                 child: const Icon(Icons.delete),
               ),
             )),
-
+/*
         Positioned(
             top: 450,
             child: ElevatedButton(
                 onPressed: playRecording, child: const Text("Poner"))),
-
+*/
         // Duracion de grabacion
 
         Positioned(
-            top: 300,
+            top: 340,
             child: Container(
               child: Text(
                 '${(_duracion.inMinutes % 60).toString().padLeft(2, '0')}:${(_duracion.inSeconds % 60).toString().padLeft(2, '0')}',
