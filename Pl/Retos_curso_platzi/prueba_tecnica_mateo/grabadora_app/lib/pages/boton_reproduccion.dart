@@ -1,34 +1,60 @@
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 
 class BotonReproduccion extends StatefulWidget {
+  final String pathGrabacion;
+
+  BotonReproduccion({required this.pathGrabacion, Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _BotonReproduccion();
   }
 }
-// Class for the different states
 
 class _BotonReproduccion extends State<BotonReproduccion> {
-  String mensaje_snackbar = "";
+  late final PlayerController playerController;
   bool isPlay = false;
 
-  void onPressPlay() {
-    setState(() {
-      isPlay = !isPlay;
-    });
+  @override
+  void initState() {
+    super.initState();
+    playerController = PlayerController();
+  }
+
+  Future<void> reproducirAudio() async {
+    try {
+      await playerController.preparePlayer(path: widget.pathGrabacion);
+      await playerController.startPlayer();
+    } catch (e) {
+      print("error para reproducir");
+    }
+  }
+
+  Future<void> stopAudio() async {
+    try {
+      await playerController.stopPlayer(); // Detener el reproductor
+    } catch (e) {
+      print("error para pausar");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    double buttonSize = 56.0; // Tamaño estándar de un FloatingActionButton
+    double buttonSize = 56.0;
     return FloatingActionButton(
       onPressed: () {
-        onPressPlay();
+        setState(() {
+          isPlay = !isPlay;
+        });
+        if (isPlay) {
+          reproducirAudio();
+        } else {
+          stopAudio();
+        }
       },
       backgroundColor: Colors.white,
-
-      tooltip:
-          "Reproducir", // Texto de ayuda para que el usuario sepa que pasa con el boton
+      tooltip: "Reproducir",
       child: Icon(
         isPlay == false
             ? Icons.play_circle_outlined

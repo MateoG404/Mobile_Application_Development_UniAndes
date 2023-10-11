@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:grabadora_app/pages/reproduccir_grabacion.dart';
 
 // Definición de la clase ListaGrabaciones como un StatefulWidget
@@ -13,6 +15,12 @@ class ListaGrabaciones extends StatefulWidget {
 class _ListaGrabacionesState extends State<ListaGrabaciones> {
   // Declaración de una variable para almacenar los archivos de audio futuros
   late Future<List<FileSystemEntity>> futureFiles;
+  AudioPlayer audioPlayer = AudioPlayer();
+  void refreshList() {
+    setState(() {
+      futureFiles = _getAudioFiles();
+    });
+  }
 
   @override
   void initState() {
@@ -25,6 +33,7 @@ class _ListaGrabacionesState extends State<ListaGrabaciones> {
   Future<List<FileSystemEntity>> _getAudioFiles() async {
     // Obtener el directorio de documentos de la aplicación
     final directory = await getApplicationDocumentsDirectory();
+
     // Definir la ruta de la carpeta "grabaciones"
     final folderPath = '${directory.path}/grabaciones';
     final folder = Directory(folderPath);
@@ -60,10 +69,9 @@ class _ListaGrabacionesState extends State<ListaGrabaciones> {
               child: Column(
                 children: snapshot.data!
                     .map((file) => ReproduccirGrabacion(
-                          // Usar el último segmento de la ruta del archivo como el título
+                          pathGrabacion: file.path,
                           titulo_grabacion: file.uri.pathSegments.last,
-                          // Usar un marcador de posición para la duración
-                          descripcion_grabacion: "Duración a determinar",
+                          onDelete: refreshList,
                         ))
                     .toList(),
               ),
