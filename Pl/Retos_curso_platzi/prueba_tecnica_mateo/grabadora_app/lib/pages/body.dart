@@ -37,16 +37,7 @@ class _BodyClassState extends State<BodyClass>
       ),
       body: Column(
         children: [
-          Center(
-            child: Text(
-              'Mis grabaciones',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-          ),
-          Container(
-            width: 100,
-            height: 100,
+          Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
