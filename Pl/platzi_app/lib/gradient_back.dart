@@ -11,9 +11,12 @@ class GradientBack extends StatelessWidget {
       height: 250,
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-              colors: [Colors.blue, Colors.lightBlueAccent],
-              begin: FractionalOffset(0.2, 0.8),
-              end: FractionalOffset(1.0, 0.6),
+              colors: [
+                Color.fromRGBO(48, 79, 188, 1),
+                Color.fromRGBO(20, 28, 140, 1)
+              ],
+              begin: FractionalOffset(0.0, 0.10),
+              end: FractionalOffset(1.2, 0.5),
               stops: [0.1, 0.6],
               tileMode: TileMode.clamp)),
       alignment: const Alignment(-0.9, -0.6),

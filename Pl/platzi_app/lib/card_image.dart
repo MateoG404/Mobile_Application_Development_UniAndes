@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:platzi_app/floating_action_button_green.dart';
 
 class CardImage extends StatelessWidget {
-  String path_image = 'assets/images/choconta.jpeg';
+  String path_image = 'Pl/platzi_app/assets';
 
   CardImage(this.path_image);
 
