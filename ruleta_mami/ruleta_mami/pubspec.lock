@@ -115,6 +115,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  roulette:
+    dependency: "direct main"
+    description:
+      name: roulette
+      sha256: "5480d2657c1269a51f2c1fdaa34f363d098025c7148469a22b4e0cf343f05655"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.5"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -186,3 +194,4 @@ packages:
     version: "0.1.4-beta"
 sdks:
   dart: ">=3.1.2 <4.0.0"
+  flutter: ">=1.17.0"
