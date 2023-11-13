@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruleta_mami/customappBar.dart';
+import 'package:ruleta_mami/agregarnombres.dart';
 import 'package:ruleta_mami/ruleta.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: CustomAppBar(),
-        body: Ruleta(),
+        body: Column(children: [MyFortuneWheel(), AgregarNombres()]),
         // Add more properties as needed
       ),
     );
