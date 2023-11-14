@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: CustomAppBar(),
-        body: Column(children: [MyFortuneWheel(), AgregarNombres()]),
-        // Add more properties as needed
-      ),
+          appBar: CustomAppBar(),
+          body: MyFortuneWheel() //Column(children: [MyFortuneWheel()]),
+          // Add more properties as needed
+          ),
     );
   }
 }

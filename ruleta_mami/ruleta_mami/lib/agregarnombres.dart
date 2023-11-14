@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AgregarNombres extends StatefulWidget {
+  // Creación del callback
+  final Function(String) onNombreAdded;
+  AgregarNombres({Key? key, required this.onNombreAdded}) : super(key: key);
+
   @override
   _AgregarNombresState createState() => _AgregarNombresState();
 }
@@ -12,38 +16,30 @@ class _AgregarNombresState extends State<AgregarNombres> {
 
   @override
   Widget build(BuildContext context) {
-    final mostrarTexto = SizedBox(
-        width: 250,
-        child: TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Password',
-            )));
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         TextButton(
-          child: Text("Agregar Nombres"),
+          child: const Text("Agregar Nombres"),
           onPressed: () {
             textController.clear();
             showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Ingrese el nombre"),
+                  title: const Text("Ingrese el nombre"),
                   content: TextField(
                     controller: textController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Nombre",
                     ),
                   ),
                   actions: <Widget>[
                     ElevatedButton(
-                      child: Text("Guardar"),
+                      child: const Text("Guardar"),
                       onPressed: () {
-                        // Aquí puedes manejar la información ingresada
+                        // Llamar el callback
+                        widget.onNombreAdded(textController.text);
                         print("Nombre guardado: ${textController.text}");
                         Navigator.of(context).pop(); // Cerrar el AlertDialog
                       },
